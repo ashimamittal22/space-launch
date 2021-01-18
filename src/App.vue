@@ -8,7 +8,7 @@
       </div>
       <div style="display:inline-block">
         <div class="yearWrapper" v-for="(year, index) in years" :key="index">
-          <button v-on:click="yearSelected" v-bind:class="{buttonClass, active: year === selectedYear}">{{year}}</button>
+          <button v-on:click="yearSelected" v-bind:class="{buttonClass, active: selectedYear === year}">{{year}}</button>
         </div>
       </div>
       <div >
@@ -24,7 +24,7 @@
       </div>
       <div >
         <div class="yearWrapper" v-for="(option, i) in landing" :key="i">
-          <button v-on:click="selectLanding" v-bind:class="{buttonClass, active: option === selectedLand}">{{option}}</button>
+          <button v-on:click="selectLanding" v-bind:class="{buttonClass, active: option == selectedLand}">{{option}}</button>
         </div>
       </div>
     </div>
@@ -40,6 +40,7 @@
 <script>
  import space from './components/space.vue'
  import axios from 'axios';
+ 
 
 export default {
   computed: {
@@ -51,7 +52,6 @@ export default {
     axios
       .get('https://api.spacexdata.com/v3/launches?limit=100')
       .then(response => {
-        console.log(response)
         this.info = response.data
         this.infoData = response.data
       })
@@ -71,7 +71,8 @@ export default {
       selectedYear: "",
       selectedLaunch: "",
       selectedLand: "",
-      buttonClass: "buttonClass"
+      buttonClass: "buttonClass",
+      isActive: false
     }
   },
   name: 'App',
@@ -79,17 +80,32 @@ export default {
     space
   },
   methods: {
-    yearSelected(e){
-      
-      this.selectedYear = e.target.innerHTML
-      this.filter(this.selectedYear, this.selectedLaunch, this.selectedLand)
+    yearSelected: function(e){
+
+      this.selectedYear = ""
+      e.target.classList.toggle('active')
+     // history.pushState({}, null, "/?");
+     if(e.target.classList.contains('active')){
+       this.selectedYear = e.target.innerHTML
+     }
+     this.filter(this.selectedYear, this.selectedLaunch, this.selectedLand)
     },
     selectLaunch(e){
-      this.selectedLaunch = e.target.innerHTML
+      this.selectedLaunch = ""
+      e.target.classList.toggle('active')
+      
+      if(e.target.classList.contains('active')){
+       this.selectedLaunch = e.target.innerHTML
+     }
       this.filter(this.selectedYear, this.selectedLaunch, this.selectedLand)
     },
     selectLanding(e){
-      this.selectedLand = e.target.innerHTML
+      this.selectedLand = ""
+      e.target.classList.toggle('active')
+      
+      if(e.target.classList.contains('active')){
+       this.selectedLand = e.target.innerHTML
+     }
       this.filter(this.selectedYear, this.selectedLaunch, this.selectedLand)
     },
     filter(year, launch, land){
@@ -100,9 +116,17 @@ export default {
       if(launch !== ""){
         this.infoData = this.infoData.filter(space => space.launch_success.toString() == launch)
       }
-      if(land !== "" || land != null){
-        this.infoData = this.infoData.filter(space => space.rocket.first_stage.cores[0].land_success.toString() == land)
+      if(land){
+        if(land !== ""){
+          this.infoData = this.infoData.filter(function(space){
+            if(space.rocket.first_stage.cores[0].land_success){
+              return space.rocket.first_stage.cores[0].land_success.toString() == land
+            }
+              
+          })
+        }
       }
+      
         
     }
   }
