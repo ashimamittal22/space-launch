@@ -29,7 +29,7 @@
       </div>
     </div>
     <div id="container">
-      <div v-for="(item, ind) in data" :key="ind">
+      <div class="spaceContainer" v-for="(item, ind) in data" :key="ind">
         <space id="space" v-bind:item="item"></space>
       </div>
       
@@ -155,6 +155,7 @@ export default {
           width: 90%;
           display: inline-block;
           margin-bottom: 15px;
+          padding-bottom: 10px;
         }
         #container{
           width: 90%;
@@ -170,26 +171,31 @@ export default {
 }
 @media (min-width: 700px) and (max-width: 1024px) {
         #filter{
-          width: 20%;
+          width: 25%;
+          margin: 10px;
           float: left;
+          padding-bottom: 10px;
         }
         #container{
-          width: 80%;
+          width: 67%;
           float: right;
+          margin: 10px;
         }
         #space{
-          width: 50%;
-          display: inline;
+          width: 45%;
           float: left;
           background: white;
           text-align: left;
-        }
+          margin: 0px 12px 12px 0px;
+          height: 430px;
+      }
 }   
 @media (min-width: 1024px){
        #filter{
           width: 20%;
           float: left;
           margin: 10px;
+          padding: 10px;
         }
         #container{
           margin: auto;
@@ -198,7 +204,7 @@ export default {
         }
         #space{
           width: 19%;
-          height: 390px;
+          height: 375px;
           display: inline;
           float: left;
           margin: 10px;

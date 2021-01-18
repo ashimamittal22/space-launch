@@ -4,7 +4,7 @@
             <img id="space_image" :src=item.links.mission_patch_small >
         </div>
         
-        <h6 id="name">{{item.mission_name}} #{{item.flight_number}}</h6>
+        <h4 id="name">{{item.mission_name}} #{{item.flight_number}}</h4>
         <span style="width:100%" class="title">Mission Ids:</span>
             <ul style="height: 40px">
                 <li v-for="(lItem, index) in item.mission_id" :key="index">{{lItem}}</li>
@@ -27,10 +27,10 @@ export default {
 }
 #img_div{
     background: #f2f2f2;
-    padding: 30px;
-    width: 70%;
+    width: 83%;
     margin: auto;
     border-radius: 8px;
+    margin-top: 15px ;
 }
 #space_image{
     width: 100%;
@@ -53,6 +53,13 @@ export default {
 .data{
     display: inline-block;
     width: 100%;
+}
+@media (min-width: 700px) and (max-width: 1024px){
+    #container{
+        width: 67%;
+        float: right;
+        margin: 10px;
+    }
 }
 @media (min-width: 1024px){
     #img_div{
