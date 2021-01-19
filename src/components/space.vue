@@ -6,7 +6,7 @@
         
         <h4 id="name">{{item.mission_name}} #{{item.flight_number}}</h4>
         <span style="width:100%" class="title">Mission Ids:</span>
-            <ul style="height: 40px">
+            <ul style="height: 40px; color:#6772A4">
                 <li v-for="(lItem, index) in item.mission_id" :key="index">{{lItem}}</li>
             </ul>
         <div class="data"><span class="title">Launch Year:</span><span class="value">{{item.launch_year}}</span></div>
@@ -44,11 +44,13 @@ export default {
 .value{
     font-size: 12px;
     float: left;
+    color: #6772A4;
 }
 #name{
     padding-left: 20px;
     font-size: 13px;
     font-weight: bolder;
+    color: #6772A4;
 }
 .data{
     display: inline-block;
