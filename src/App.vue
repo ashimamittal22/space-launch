@@ -84,7 +84,6 @@ export default {
 
       this.selectedYear = ""
       e.target.classList.toggle('active')
-     // history.pushState({}, null, "/?");
      if(e.target.classList.contains('active')){
        this.selectedYear = e.target.innerHTML
      }
@@ -116,18 +115,9 @@ export default {
       if(launch !== ""){
         this.infoData = this.infoData.filter(space => space.launch_success.toString() == launch)
       }
-      if(land){
-        if(land !== ""){
-          this.infoData = this.infoData.filter(function(space){
-            if(space.rocket.first_stage.cores[0].land_success){
-              return space.rocket.first_stage.cores[0].land_success.toString() == land
-            }
-              
-          })
-        }
-      }
-      
-        
+      if(land != ""){
+          this.infoData = this.infoData.filter(space => space.rocket.first_stage.cores[0].land_success == (land == "true"))
+     }
     }
   }
 }

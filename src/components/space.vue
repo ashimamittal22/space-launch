@@ -11,7 +11,10 @@
             </ul>
         <div class="data"><span class="title">Launch Year:</span><span class="value">{{item.launch_year}}</span></div>
         <div class="data"><span class="title">Successful Launch:</span><span class="value">{{item.launch_success}}</span></div>
-        <div class="data"><span class="title">Successful Landing:</span><span class="value">{{item.rocket.first_stage.cores[0].land_success}}</span></div>
+
+        <div v-if="item.rocket.first_stage.cores[0].land_success == true || item.rocket.first_stage.cores[0].land_success == false" class="data"><span class="title">Successful Landing:</span><span class="value">{{item.rocket.first_stage.cores[0].land_success}}</span></div>
+         <div v-else class="data"><span class="title">Successful Landing:</span><span class="value">NA</span></div>
+        
     </div>
 </template>
 <script>
